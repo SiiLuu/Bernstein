@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: poll
+spec:
+  selector:
+    app: poll
+  ports:
+    - protocol: TCP
+      port: 80

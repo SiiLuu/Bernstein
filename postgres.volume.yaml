@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: default
+  name: postgresql
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 512M
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/lib/postgresql/data"

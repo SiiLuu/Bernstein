@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: poll
+  labels:
+    app: poll
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: poll
+  template:
+    metadata:
+      labels:
+        app: poll
+    spec:
+      containers:
+        - name: poll
+          image: epitechcontent/t-dop-600-poll:k8s
+          resources:
+            limits:
+              memory: "128M"
+          env:
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: redis
+                  key: REDIS_HOST
+      restartPolicy: Always
+
+# Has a Traefik rule matching poll.dop.io host and proxying to poll service
